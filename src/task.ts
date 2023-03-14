@@ -57,15 +57,15 @@ const sortCategoryByOrder = (
   category_b: CategoryListElement
 ) => category_a.order - category_b.order;
 
-function processCategory(
+const processCategory = (
   category: Category,
   toShowOnHome?: number[]
-): CategoryListElement {
+): CategoryListElement => {
   const children = category.children?.map((child) => processCategory(child));
   const sortedChildren = children?.sort(sortCategoryByOrder) ?? [];
 
   return getCategoryListElement(category, sortedChildren, toShowOnHome);
-}
+};
 
 export const categoryTree = async (): Promise<CategoryListElement[]> => {
   const res = await getCategories();
